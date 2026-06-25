@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WanderVista – Explore the World</title>
+<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- ══ NAV ══ -->
+    <nav>
+      <div class="logo">🌴 Wander<span>Vista</span></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#destinations" class="nav-cta">Plan a Trip</a>
+      <button id="menu-btn" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <section id="home">
+      <video src=""></video>
+      <video id="hero-video" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4" />
+      </video>
+      
+
+     
+
+      <div class="hero-overlay">
+        <div class="hero-badge">🌴 Sun, Sea & Adventure</div>
+        <h1>Escape to<br /><span>Paradise</span></h1>
+        <p>
+          Turquoise waters, swaying palms, and endless sunsets — your tropical
+          getaway starts here.
+        </p>
+        <a href="#destinations" class="btn-primary">Explore Destinations</a>
+        <a href="#contact" class="btn-outline">Contact Us</a>
+        <div class="hero-stats">
+          <div><strong>120+</strong><span>Destinations</span></div>
+          <div><strong>50K+</strong><span>Happy Travellers</span></div>
+          <div><strong>4.9★</strong><span>Average Rating</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ DESTINATIONS ══ -->
+    <section id="destinations" class="section">
+      <div class="section-label">🐚 Where to go</div>
+      <h2 class="section-title">Tropical Escapes</h2>
+      <p class="section-sub">
+        From coral reefs and powdery sands to jungle waterfalls — find your
+        perfect slice of paradise.
+      </p>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by country, city, or attraction…"
+          oninput="filterCards()"
+        />
+        <select id="cat-filter" onchange="filterCards()">
+          <option value="">All Categories</option>
+          <option>Beaches</option>
+          <option>Mountains</option>
+          <option>Adventure</option>
+          <option>Historical</option>
+          <option>Wildlife</option>
+        </select>
+        <button onclick="filterCards()">Search</button>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filters">
+        <button class="filter-btn active" onclick="setFilter(this, '')">
+          All
+        </button>
+        <button class="filter-btn" onclick="setFilter(this, 'Beaches')">
+          🏖️ Beaches
+        </button>
+        <button class="filter-btn" onclick="setFilter(this, 'Mountains')">
+          🏔️ Mountains
+        </button>
+        <button class="filter-btn" onclick="setFilter(this, 'Adventure')">
+          🧗 Adventure
+        </button>
+        <button class="filter-btn" onclick="setFilter(this, 'Historical')">
+          🏛️ Historical
+        </button>
+        <button class="filter-btn" onclick="setFilter(this, 'Wildlife')">
+          🦁 Wildlife
+        </button>
+      </div>
+
+      <!-- Cards -->
+      <div class="card-grid" id="card-grid"></div>
+    </section>
+
+    <!-- ══ DETAIL MODAL ══ -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+      <div class="modal">
+        <div class="modal-img">
+          <img id="m-img" src="" alt="" />
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <h2 id="m-name"></h2>
+          <div class="modal-loc" id="m-loc"></div>
+          <div class="info-grid">
+            <div class="info-box">
+              <div class="lbl">Travel Cost</div>
+              <div class="val" id="m-price"></div>
+            </div>
+            <div class="info-box">
+              <div class="lbl">Best Time</div>
+              <div class="val" id="m-time"></div>
+            </div>
+            <div class="info-box">
+              <div class="lbl">Weather</div>
+              <div class="val" id="m-weather"></div>
+            </div>
+            <div class="info-box">
+              <div class="lbl">Rating</div>
+              <div class="val" id="m-rating"></div>
+            </div>
+          </div>
+          <h3>About</h3>
+          <p id="m-desc"></p>
+          <h3>Top Attractions</h3>
+          <div class="attractions" id="m-attr"></div>
+          <h3>Travel Tips</h3>
+          <p id="m-tips"></p>
+          <h3>Gallery</h3>
+          <div class="gallery" id="m-gallery"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CONTACT ══ -->
+    <section id="contact" class="section">
+      <div class="section-label">🌺 Get in touch</div>
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-sub">
+        Have questions? We're here to help plan your perfect trip.
+      </p>
+
+      <div class="contact-grid">
+        <!-- Info -->
+        <div class="contact-info">
+          <h3>Our Details</h3>
+          <div class="info-item">
+            <div class="info-icon">🏢</div>
+            <div class="info-text">
+              <strong>Company</strong><span>WanderVista Travel Co.</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-text">
+              <strong>Address</strong
+              ><span>42 Explorer Street, Travel City, TC 10001</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-text">
+              <strong>Phone</strong><span>+1 (800) 926-3378</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">✉️</div>
+            <div class="info-text">
+              <strong>Email</strong><span>hello@wandervista.com</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div class="info-text">
+              <strong>Working Hours</strong
+              ><span>Mon–Fri: 9AM–6PM | Sat: 10AM–3PM</span>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" title="Facebook">📘</a>
+            <a href="#" title="Instagram">📸</a>
+            <a href="#" title="Twitter / X">🐦</a>
+            <a href="#" title="YouTube">▶️</a>
+            <a href="#" title="LinkedIn">💼</a>
+          </div>
+
+          <!-- Map placeholder -->
+        <div class="map-wrap">
+  <div class="map-placeholder">
+    <iframe
+     src="https://maps.google.com/maps?q=9.9252,78.1198&z=15&output=embed"
+      width="100%"
+      height="100%"
+      style="border:0; border-radius:12px;"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-name">Full Name *</label>
+              <input type="text" id="f-name" placeholder="Jane Smith" />
+              <div class="form-error" id="err-name">
+                Please enter your name.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email *</label>
+              <input type="email" id="f-email" placeholder="jane@email.com" />
+              <div class="form-error" id="err-email">Enter a valid email.</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-phone">Phone</label>
+              <input type="tel" id="f-phone" placeholder="+1 234 567 8900" />
+            </div>
+            <div class="form-group">
+              <label for="f-subject">Subject *</label>
+              <select id="f-subject">
+                <option value="">Select…</option>
+                <option>Trip Planning</option>
+                <option>Booking Inquiry</option>
+                <option>General Question</option>
+                <option>Feedback</option>
+              </select>
+              <div class="form-error" id="err-subject">
+                Please select a subject.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="f-msg">Message *</label>
+            <textarea
+              id="f-msg"
+              placeholder="Tell us about your dream trip…"
+            ></textarea>
+            <div class="form-error" id="err-msg">
+              Please enter your message.
+            </div>
+          </div>
+          <button class="form-submit" onclick="submitForm()">
+            Send Message ✈️
+          </button>
+          <div class="form-success" id="form-success">
+            ✅ Message sent! We'll reply within 24 hours.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+      <p>
+        © 2025 🌴 <span>WanderVista</span>. All rights reserved. Crafted with ☀️
+        for tropical dreamers everywhere.
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
