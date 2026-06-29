@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | WanderVista</title>
+
+    <link rel="stylesheet" href="register.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="register-box">
+
+        <h1>🌴 WanderVista</h1>
+
+        <h2>Create Your Account</h2>
+
+        <p>Start your next adventure with us.</p>
+
+        <form id="registerForm">
+
+            <div class="input-box">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name">
+                <small id="nameError"></small>
+            </div>
+
+            <div class="input-box">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <small id="emailError"></small>
+            </div>
+
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Create password">
+                <small id="passwordError"></small>
+            </div>
+
+            <div class="input-box">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm password">
+                <small id="confirmError"></small>
+            </div>
+
+            <button type="submit">Create Account</button>
+
+        </form>
+
+        <p class="bottom">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+const form=document.getElementById("registerForm");
+
+form.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let password=document.getElementById("password").value.trim();
+let confirmPassword=document.getElementById("confirmPassword").value.trim();
+
+document.getElementById("nameError").innerHTML="";
+document.getElementById("emailError").innerHTML="";
+document.getElementById("passwordError").innerHTML="";
+document.getElementById("confirmError").innerHTML="";
+
+let valid=true;
+
+const namePattern=/^[A-Za-z ]{3,}$/;
+const emailPattern=/^[^\s@]+@[^\s@]+\.com$/;
+const passwordPattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+if(name==""){
+document.getElementById("nameError").innerHTML="Name cannot be empty";
+valid=false;
+}
+else if(!namePattern.test(name)){
+document.getElementById("nameError").innerHTML="Minimum 3 letters. Only alphabets and spaces allowed.";
+valid=false;
+}
+
+if(email==""){
+document.getElementById("emailError").innerHTML="Email cannot be empty";
+valid=false;
+}
+else if(!emailPattern.test(email)){
+document.getElementById("emailError").innerHTML="Enter a valid email ending with .com";
+valid=false;
+}
+
+if(password==""){
+document.getElementById("passwordError").innerHTML="Password cannot be empty";
+valid=false;
+}
+else if(!passwordPattern.test(password)){
+document.getElementById("passwordError").innerHTML="Password must contain uppercase, lowercase, number, special character and be at least 8 characters.";
+valid=false;
+}
+
+if(confirmPassword==""){
+document.getElementById("confirmError").innerHTML="Confirm Password cannot be empty";
+valid=false;
+}
+else if(password!==confirmPassword){
+document.getElementById("confirmError").innerHTML="Passwords do not match";
+valid=false;
+}
+
+if(valid){
+
+if(localStorage.getItem(email)){
+
+alert("Email already registered.");
+
+return;
+
+}
+
+const user={
+
+name:name,
+
+email:email,
+
+password:password
+
+};
+
+localStorage.setItem(email,JSON.stringify(user));
+
+alert("Registration Successful!");
+
+window.location.href="login.html";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

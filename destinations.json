@@ -1,0 +1,176 @@
+[
+  {
+    "id": 1,
+    "destinationName": "Bali",
+    "country": "Indonesia",
+    "city": "Denpasar",
+    "category": "Beaches",
+    "price": "$1,200",
+    "rating": "4.9 ★",
+    "image": "./images/t1.jpg",
+    "description": "A tropical paradise with lush rice terraces, vibrant temples, and pristine beaches.",
+    "attractions": [
+      "Uluwatu Temple",
+      "Tegallalang Rice Terrace",
+      "Seminyak Beach",
+      "Mount Batur"
+    ],
+    "weather": "27°C Sunny",
+    "fullDescription": "Bali is famous for its beautiful beaches, ancient temples, rice terraces, and vibrant culture. It is one of the world's most popular tropical destinations.",
+    "travelCost": "$1,200",
+    "weatherInformation": "Warm tropical climate throughout the year.",
+    "bestTimeToVisit": "April - October",
+    "locationMap": "https://maps.google.com/maps?q=Bali&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    "travelTips": "Book accommodation in advance during peak season. Respect local customs at temples.",
+    "imageGallery": [
+      "./images/bali1.jpg",
+      "./images/bali2.jpg",
+      "./images/bali3.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "destinationName": "Swiss Alps",
+    "country": "Switzerland",
+    "city": "Interlaken",
+    "category": "Mountains",
+    "price": "$2,800",
+    "rating": "4.8 ★",
+    "image": "./images/swiss1.jpg",
+    "description": "Breathtaking alpine scenery, charming ski resorts, and world-class hiking trails.",
+    "attractions": [
+      "Matterhorn",
+      "Jungfraujoch",
+      "Lake Geneva",
+      "Grindelwald"
+    ],
+    "weather": "−5°C Snow",
+    "fullDescription": "The Swiss Alps offer stunning mountain landscapes, skiing, hiking, and picturesque villages.",
+    "travelCost": "$2,800",
+    "weatherInformation": "Cold winters with snowfall and pleasant summers.",
+    "bestTimeToVisit": "December - March",
+    "locationMap": "https://maps.google.com/maps?q=Swiss+Alps&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    "travelTips": "Book ski passes early and wear layered clothing.",
+    "imageGallery": [
+      "./images/swiss1.jpg",
+      "./images/swiss2.jpg",
+      "./images/swiss3.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "destinationName": "Machu Picchu",
+    "country": "Peru",
+    "city": "Cusco",
+    "category": "Historical",
+    "price": "$1,600",
+    "rating": "4.9 ★",
+    "image": "./images/t2.jpg",
+    "description": "An ancient Incan citadel set high in the Andes Mountains.",
+    "attractions": [
+      "Sun Gate",
+      "Inca Trail",
+      "Huayna Picchu",
+      "Sacred Valley"
+    ],
+    "weather": "18°C Mild",
+    "fullDescription": "Machu Picchu is one of the Seven Wonders of the World and a UNESCO World Heritage Site.",
+    "travelCost": "$1,600",
+    "weatherInformation": "Cool mountain climate with occasional rain.",
+    "bestTimeToVisit": "May - September",
+   "locationMap": "https://maps.google.com/maps?q=Machu+Picchu+Peru&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    "travelTips": "Acclimatize in Cusco before visiting and book tickets in advance.",
+    "imageGallery": [
+      "./images/t2.jpg",
+      "./images/t3.jpg",
+      "./images/t4.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "destinationName": "Serengeti Safari",
+    "country": "Tanzania",
+    "city": "Serengeti",
+    "category": "Wildlife",
+    "price": "$3,500",
+    "rating": "5.0 ★",
+    "image": "./images/safari1.jpg",
+    "description": "Witness the Great Migration across the vast Serengeti plains.",
+    "attractions": [
+      "Great Migration",
+      "Ngorongoro Crater",
+      "Lake Manyara",
+      "Balloon Safari"
+    ],
+    "weather": "25°C Dry",
+    "fullDescription": "The Serengeti National Park is home to incredible wildlife and one of nature's greatest spectacles.",
+    "travelCost": "$3,500",
+    "weatherInformation": "Dry and warm during safari season.",
+    "bestTimeToVisit": "June - September",
+    "locationMap": "https://maps.google.com/maps?q=Serengeti+National+Park+Tanzania&t=&z=11&ie=UTF8&iwloc=&output=embed",
+    "travelTips": "Carry binoculars, neutral-colored clothing, and a camera.",
+    "imageGallery": [
+      "./images/safari1.jpg",
+      "./images/safari2.jpg",
+      "./images/safari3.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "destinationName": "Queenstown",
+    "country": "New Zealand",
+    "city": "Queenstown",
+    "category": "Adventure",
+    "price": "$2,200",
+    "rating": "4.8 ★",
+    "image": "./images/queens1.jpg",
+    "description": "The adventure capital of the world with thrilling outdoor activities.",
+    "attractions": [
+      "AJ Hackett Bungy",
+      "Milford Sound",
+      "Skyline Gondola",
+      "Jet Boating"
+    ],
+    "weather": "22°C Clear",
+    "fullDescription": "Queenstown offers bungee jumping, skydiving, hiking, skiing, and breathtaking scenery.",
+    "travelCost": "$2,200",
+    "weatherInformation": "Pleasant summers and snowy winters.",
+    "bestTimeToVisit": "December - February",
+    "locationMap": "https://maps.google.com/maps?q=Queenstown+New+Zealand&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    "travelTips": "Book adventure activities early and rent a car for nearby attractions.",
+    "imageGallery": [
+      "./images/queens1.jpg",
+      "./images/queens2.jpg",
+      "./images/queens3.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "destinationName": "Maldives",
+    "country": "Maldives",
+    "city": "Malé",
+    "category": "Beaches",
+    "price": "$4,000",
+    "rating": "4.9 ★",
+    "image": "./images/maldive1.jpg",
+    "description": "Crystal-clear lagoons, overwater villas, and world-class snorkeling.",
+    "attractions": [
+      "Overwater Villas",
+      "Baa Atoll",
+      "Whale Shark Snorkeling",
+      "Island Hopping"
+    ],
+    "weather": "30°C Sunny",
+    "fullDescription": "The Maldives is famous for luxury resorts, coral reefs, white-sand beaches, and crystal-clear waters.",
+    "travelCost": "$4,000",
+    "weatherInformation": "Warm tropical weather all year.",
+    "bestTimeToVisit": "November - April",
+    "locationMap": "https://maps.google.com/maps?q=Maldives&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    "travelTips": "Use reef-safe sunscreen and travel during the dry season.",
+    "imageGallery": [
+      "./images/maldive1.jpg",
+      "./images/maldive2.jpg",
+      "./images/maldive3.jpg"
+    ]
+  }
+]

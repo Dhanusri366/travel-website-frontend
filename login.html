@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | WanderVista</title>
+
+    <link rel="stylesheet" href="login.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="login-box">
+
+        <h1>🌴 WanderVista</h1>
+
+        <h2>Welcome Back</h2>
+
+        <p>Login to continue your adventure.</p>
+
+        <form id="loginForm">
+
+            <div class="input-box">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="Enter Email">
+                <small id="emailError"></small>
+            </div>
+
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter Password">
+                <small id="passwordError"></small>
+            </div>
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p class="bottom">
+            Don't have an account?
+            <a href="register.html">Register</a>
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+const form=document.getElementById("loginForm");
+
+form.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let email=document.getElementById("email").value.trim();
+
+let password=document.getElementById("password").value.trim();
+
+let emailError=document.getElementById("emailError");
+
+let passwordError=document.getElementById("passwordError");
+
+emailError.innerHTML="";
+passwordError.innerHTML="";
+
+let valid=true;
+
+const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(email==""){
+emailError.innerHTML="Email cannot be empty";
+valid=false;
+}
+else if(!emailPattern.test(email)){
+emailError.innerHTML="Enter a valid email";
+valid=false;
+}
+
+if(password==""){
+passwordError.innerHTML="Password cannot be empty";
+valid=false;
+}
+else if(password.length<8){
+passwordError.innerHTML="Minimum 8 characters required";
+valid=false;
+}
+
+if(valid){
+
+const user=JSON.parse(localStorage.getItem(email));
+
+if(user==null){
+
+alert("User not found. Please register first.");
+
+return;
+
+}
+
+if(user.password===password){
+
+alert("Login Successful!");
+
+window.location.href="index.html";
+
+}
+
+else{
+
+alert("Incorrect Password");
+
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
