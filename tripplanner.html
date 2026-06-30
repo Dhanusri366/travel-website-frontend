@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner | WanderVista</title>
+
+    <link rel="stylesheet" href="tripplanner.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav>
+
+<h2>🌴 WanderVista</h2>
+
+<div>
+<a href="index.html">Home</a>
+<a href="tripplanner.html">Trip Planner</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="planner">
+
+<h1>Plan Your Trip</h1>
+
+<form id="tripForm">
+
+<label>Destination</label>
+
+<select id="destination">
+
+<option value="">Select Destination</option>
+
+</select>
+
+<small id="destinationError"></small>
+
+<label>Start Date</label>
+
+<input type="date" id="startDate">
+
+<small id="startError"></small>
+
+<label>End Date</label>
+
+<input type="date" id="endDate">
+
+<small id="endError"></small>
+
+<label>Number of Travelers</label>
+
+<input type="number" id="travelers" min="1" max="10">
+
+<small id="travelerError"></small>
+
+<button type="button" onclick="calculateCost()">
+Calculate Cost
+</button>
+
+<h2>Total Cost :
+<span id="totalCost">$0</span>
+</h2>
+
+<button type="submit">
+Save Trip
+</button>
+
+</form>
+
+</div>
+
+<div class="trips">
+
+<h2>My Planned Trips</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Destination</th>
+
+<th>Dates</th>
+
+<th>Travelers</th>
+
+<th>Cost</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tripTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+let destinations=[];
+
+let selectedPrice=0;
+
+fetch("destinations.json")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+destinations=data;
+
+const select=document.getElementById("destination");
+
+data.forEach(d=>{
+
+let option=document.createElement("option");
+
+option.value=d.destinationName;
+
+option.textContent=d.destinationName;
+
+option.dataset.price = Number(d.price.replace(/[^0-9]/g, ""));
+
+select.appendChild(option);
+
+});
+
+});
+
+document.getElementById("destination").addEventListener("change",function(){
+
+selectedPrice=parseInt(this.selectedOptions[0].dataset.price||0);
+
+});
+
+function calculateCost(){
+
+const travelers=parseInt(document.getElementById("travelers").value)||0;
+
+const total=selectedPrice*travelers;
+
+document.getElementById("totalCost").textContent="$"+total;
+
+}
+
+let trips=JSON.parse(localStorage.getItem("trips"))||[];
+
+displayTrips();
+
+document.getElementById("tripForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+document.getElementById("destinationError").innerHTML="";
+document.getElementById("startError").innerHTML="";
+document.getElementById("endError").innerHTML="";
+document.getElementById("travelerError").innerHTML="";
+
+let destination=document.getElementById("destination").value;
+
+let start=document.getElementById("startDate").value;
+
+let end=document.getElementById("endDate").value;
+
+let travelers=parseInt(document.getElementById("travelers").value);
+
+let valid=true;
+
+const today=new Date().toISOString().split("T")[0];
+
+if(destination==""){
+
+document.getElementById("destinationError").innerHTML="Select destination";
+
+valid=false;
+
+}
+
+if(start<today){
+
+document.getElementById("startError").innerHTML="Past dates not allowed";
+
+valid=false;
+
+}
+
+if(end<start){
+
+document.getElementById("endError").innerHTML="End date must be after start date";
+
+valid=false;
+
+}
+
+if(travelers<1||travelers>10){
+
+document.getElementById("travelerError").innerHTML="Travelers must be between 1 and 10";
+
+valid=false;
+
+}
+
+if(valid){
+
+let trip={
+
+destination,
+
+start,
+
+end,
+
+travelers,
+
+cost:selectedPrice*travelers,
+
+status:"Pending"
+
+};
+
+trips.push(trip);
+
+localStorage.setItem("trips",JSON.stringify(trips));
+
+displayTrips();
+
+this.reset();
+
+document.getElementById("totalCost").textContent="$0";
+
+}
+
+});
+
+function displayTrips(){
+
+const table=document.getElementById("tripTable");
+
+table.innerHTML="";
+
+trips.forEach((trip,index)=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${trip.destination}</td>
+
+<td>${trip.start}<br>${trip.end}</td>
+
+<td>${trip.travelers}</td>
+
+<td>$${trip.cost}</td>
+
+<td>${trip.status}</td>
+
+<td>
+
+<button onclick="deleteTrip(${index})">
+
+Delete
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function deleteTrip(index){
+
+trips.splice(index,1);
+
+localStorage.setItem("trips",JSON.stringify(trips));
+
+displayTrips();
+
+}
+
+</script>
+
+</body>
+</html>

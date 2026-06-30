@@ -32,7 +32,7 @@ body{
 
 .register-box h1{
     text-align:center;
-    color:#00b894;
+    color:#03235e;
     margin-bottom:8px;
     font-size:2rem;
 }
@@ -71,8 +71,8 @@ body{
 
 .input-box input:focus{
     outline:none;
-    border-color:#00b894;
-    box-shadow:0 0 8px rgba(0,184,148,.3);
+    border-color:#03235e;
+    box-shadow:0 0 8px rgba(0, 43, 184, 0.3);
 }
 
 small{
@@ -88,7 +88,7 @@ button{
     padding:14px;
     border:none;
     border-radius:10px;
-    background:#00b894;
+    background:#03235e;
     color:white;
     font-size:17px;
     font-weight:600;
@@ -97,7 +97,7 @@ button{
 }
 
 button:hover{
-    background:#00997a;
+    background:#0f49b4;
     transform:translateY(-2px);
 }
 
