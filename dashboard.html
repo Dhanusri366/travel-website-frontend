@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <h2 class="logo" style="font-family:'Pacifico',cursive;">🌴 WanderVista</h2>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tripplanner.html">Trip Planner</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <section class="dashboard">
+
+        <h1>Dashboard Statistics</h1>
+
+        <div class="card-container">
+
+            <div class="card">
+                <h3>Total Trips</h3>
+                <p id="totalTrips">12</p>
+            </div>
+
+            <div class="card">
+                <h3>Upcoming Trips</h3>
+                <p id="upcomingTrips">5</p>
+            </div>
+
+            <div class="card">
+                <h3>Completed Trips</h3>
+                <p id="completedTrips">6</p>
+            </div>
+
+            <div class="card">
+                <h3>Cancelled Trips</h3>
+                <p id="cancelledTrips">1</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Amount Spent</h3>
+                <p id="amountSpent">$0</p>
+            </div>
+
+        </div>
+
+        <div class="charts">
+
+            <div class="chart-box">
+                <h2>Trip Status</h2>
+                <canvas id="pieChart"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h2>Monthly Bookings</h2>
+                <canvas id="barChart"></canvas>
+            </div>
+
+        </div>
+
+    </section>
+
+<script>
+
+// Sample trip data
+const trips = [
+    {
+        destination: "Bali",
+        status: "Completed",
+        amount: 15000,
+        date: "2026-01-15"
+    },
+    {
+        destination: "Machu picchu",
+        status: "Upcoming",
+        amount: 18000,
+        date: "2026-08-20"
+    },
+    {
+        destination: "Maldives",
+        status: "Completed",
+        amount: 12000,
+        date: "2026-03-10"
+    },
+    {
+        destination: "Balic",
+        status: "Cancelled",
+        amount: 10000,
+        date: "2026-04-18"
+    },
+    {
+        destination: "Queens Town",
+        status: "Upcoming",
+        amount: 25000,
+        date: "2026-09-12"
+    },
+    {
+        destination: "Bali",
+        status: "Completed",
+        amount: 9000,
+        date: "2026-02-05"
+    }
+];
+
+// ======================
+// Calculate Statistics
+// ======================
+
+const totalTrips = trips.length;
+
+const upcomingTrips = trips.filter(trip => trip.status === "Upcoming").length;
+
+const completedTrips = trips.filter(trip => trip.status === "Completed").length;
+
+const cancelledTrips = trips.filter(trip => trip.status === "Cancelled").length;
+
+const totalAmountSpent = trips
+    .filter(trip => trip.status === "Completed")
+    .reduce((total, trip) => total + trip.amount, 0);
+
+// Display values on cards
+
+document.getElementById("totalTrips").textContent = totalTrips;
+document.getElementById("upcomingTrips").textContent = upcomingTrips;
+document.getElementById("completedTrips").textContent = completedTrips;
+document.getElementById("cancelledTrips").textContent = cancelledTrips;
+document.getElementById("amountSpent").textContent =
+    "$" + totalAmountSpent.toLocaleString();
+
+// ======================
+// Pie Chart
+// ======================
+
+new Chart(document.getElementById("pieChart"), {
+
+    type: "pie",
+
+    data: {
+
+        labels: ["Upcoming", "Completed", "Cancelled"],
+
+        datasets: [{
+
+            data: [
+                upcomingTrips,
+                completedTrips,
+                cancelledTrips
+            ],
+
+            backgroundColor: [
+                "#4CAF50",
+                "#2196F3",
+                "#F44336"
+            ]
+
+        }]
+
+    }
+
+});
+
+// ======================
+// Monthly Booking Count
+// ======================
+
+const monthlyBookings = Array(12).fill(0);
+
+trips.forEach(trip => {
+
+    const month = new Date(trip.date).getMonth();
+
+    monthlyBookings[month]++;
+
+});
+
+// ======================
+// Bar Chart
+// ======================
+
+new Chart(document.getElementById("barChart"), {
+
+    type: "bar",
+
+    data: {
+
+        labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ],
+
+        datasets: [{
+
+            label: "Trips Booked",
+
+            data: monthlyBookings,
+
+            backgroundColor: "#0B2447"
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    stepSize: 1
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
