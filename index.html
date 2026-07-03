@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WanderVista – Explore the World</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../css/style.css">
   </head>
   <body>
     <!-- ══ NAV ══ -->
@@ -17,6 +17,8 @@
         <li><a href="tripplanner.html">Trip Planner</a></li>
          <li><a href="profile.html">Profile</a></li>
           <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="#wishlist">Wishlist <span class="nav-badge" id="wishlist-count">0</span></a></li>
+          <li><a href="#reviews">Reviews</a></li>
 
       </ul>
       <a href="#destinations" class="nav-cta">Plan a Trip</a>
@@ -25,13 +27,9 @@
 
     <!-- ══ HERO ══ -->
     <section id="home">
-      <video src=""></video>
       <video id="hero-video" autoplay muted loop playsinline>
         <source src="video.mp4" type="video/mp4" />
       </video>
-      
-
-     
 
       <div class="hero-overlay">
         <div class="hero-badge">🌴 Sun, Sea & Adventure</div>
@@ -132,6 +130,12 @@
               <div class="val" id="m-rating"></div>
             </div>
           </div>
+
+          <div class="modal-actions">
+            <button class="wish-btn" id="wishBtn">❤️ Add to Wishlist</button>
+            <button class="review-btn">⭐ Write a Review</button>
+          </div>
+
           <h3>About</h3>
           <p id="m-desc"></p>
           <h3>Top Attractions</h3>
@@ -156,6 +160,95 @@
         </div>
       </div>
     </div>
+
+<!-- ================= Wishlist ================= -->
+
+<section id="wishlist" class="section">
+
+    <div class="section-label">❤️ Saved Places</div>
+
+    <h2 class="section-title">My Wishlist</h2>
+
+    <p class="section-sub">
+        Save your favourite destinations and plan them later. Tap the heart on any
+        destination card to add it here.
+    </p>
+
+    <div id="wishlist-container" class="wishlist-grid">
+
+        <div class="empty-message">
+
+            No destinations added yet.
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- ══ REVIEWS ══ -->
+    <section id="reviews" class="section">
+      <div class="section-label">🌊 Traveler Stories</div>
+      <h2 class="section-title">What Our Explorers Say</h2>
+      <p class="section-sub">
+        Real trips, real opinions. Share how your getaway went, or read what
+        other travellers loved (and learned) along the way.
+      </p>
+
+      <div class="review-stats">
+        <div class="review-stat-box">
+          <strong id="review-average">–</strong>
+          <span>Average Rating</span>
+        </div>
+        <div class="review-stat-box">
+          <strong id="review-total">0</strong>
+          <span>Total Reviews</span>
+        </div>
+      </div>
+
+      <div class="reviews-layout">
+        <!-- Review Form -->
+        <div class="review-form-card">
+          <h3>Share Your Experience</h3>
+
+          <div class="form-group">
+            <label for="review-name">Your Name *</label>
+            <input type="text" id="review-name" placeholder="Jane Smith" />
+            <div class="form-error" id="err-review-name">Please enter your name.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="review-destination">Destination</label>
+            <select id="review-destination">
+              <option value="">General Feedback</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Your Rating *</label>
+            <div class="star-input" id="star-input">
+              <span data-val="1" onclick="setStarRating(1)">★</span>
+              <span data-val="2" onclick="setStarRating(2)">★</span>
+              <span data-val="3" onclick="setStarRating(3)">★</span>
+              <span data-val="4" onclick="setStarRating(4)">★</span>
+              <span data-val="5" onclick="setStarRating(5)">★</span>
+            </div>
+            <div class="form-error" id="err-review-rating">Please select a rating.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="review-comment">Your Review *</label>
+            <textarea id="review-comment" placeholder="Tell fellow travellers about your trip…"></textarea>
+            <div class="form-error" id="err-review-comment">Please write at least a few words.</div>
+          </div>
+
+          <button class="form-submit" onclick="submitReview()">Post Review 🌺</button>
+        </div>
+
+        <!-- Review List -->
+        <div class="review-list" id="review-list"></div>
+      </div>
+    </section>
 
     <!-- ══ CONTACT ══ -->
     <section id="contact" class="section">
