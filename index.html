@@ -21,6 +21,13 @@
           <li><a href="#reviews">Reviews</a></li>
 
       </ul>
+      <div class="bell-wrap" id="bell-wrap">
+        <button id="bell-icon" class="bell-btn" onclick="toggleBellDropdown()" title="Reminders">
+          🔔
+          <span class="bell-badge" id="bell-badge">0</span>
+        </button>
+        <div class="bell-dropdown" id="bell-dropdown"></div>
+      </div>
       <a href="#destinations" class="nav-cta">Plan a Trip</a>
       <button id="menu-btn" onclick="toggleMenu()">☰</button>
     </nav>
@@ -380,6 +387,7 @@
         for tropical dreamers everywhere.
       </p>
     </footer>
+     <script src="reminders.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

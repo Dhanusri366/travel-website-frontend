@@ -1,0 +1,192 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    background:#0B2447;
+    color:#fff;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active{
+    color:#FFD166;
+}
+
+/* ================= PAGE ================= */
+
+.reminder-page{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.reminder-page h1{
+    color:#0B2447;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:30px;
+}
+
+/* ================= FORM ================= */
+
+.reminder-form{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.reminder-form h2{
+    color:#0B2447;
+    margin-bottom:20px;
+}
+
+.reminder-form input,
+.reminder-form select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.reminder-form button{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#0B2447;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.reminder-form button:hover{
+    background:#19376D;
+}
+
+/* ================= REMINDER CARDS ================= */
+
+#reminderContainer{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.reminder-card{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    border-left:6px solid #0B2447;
+}
+
+.reminder-card.unread{
+    border-left:6px solid #FFD166;
+}
+
+.reminder-card h3{
+    color:#0B2447;
+    margin-bottom:15px;
+}
+
+.reminder-card p{
+    margin:8px 0;
+    color:#555;
+}
+
+.reminder-card button{
+    margin-top:12px;
+    margin-right:8px;
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    transition:.3s;
+}
+
+.reminder-card button:nth-child(6){
+    background:#0077b6;
+}
+
+.reminder-card button:nth-child(6):hover{
+    background:#005f8d;
+}
+
+.reminder-card button:nth-child(7){
+    background:#ff9800;
+}
+
+.reminder-card button:nth-child(7):hover{
+    background:#e68900;
+}
+
+.reminder-card button:nth-child(8){
+    background:#d62828;
+}
+
+.reminder-card button:nth-child(8):hover{
+    background:#b71c1c;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .reminder-form{
+        padding:20px;
+    }
+
+}

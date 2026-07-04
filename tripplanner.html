@@ -19,6 +19,16 @@
 <div>
 <a href="index.html">Home</a>
 <a href="tripplanner.html">Trip Planner</a>
+<a href="index.html#reviews">Reviews</a>
+
+<div class="bell-wrap" id="bell-wrap">
+  <button id="bell-icon" class="bell-btn" onclick="toggleBellDropdown()" title="Reminders">
+    🔔
+    <span class="bell-badge" id="bell-badge">0</span>
+  </button>
+  <div class="bell-dropdown" id="bell-dropdown"></div>
+</div>
+
 </div>
 
 </nav>
@@ -111,194 +121,72 @@ Save Trip
 
 </div>
 
-<script>
-
-let destinations=[];
-
-let selectedPrice=0;
-
-fetch("destinations.json")
-
-.then(res=>res.json())
-
-.then(data=>{
-
-destinations=data;
-
-const select=document.getElementById("destination");
-
-data.forEach(d=>{
-
-let option=document.createElement("option");
-
-option.value=d.destinationName;
-
-option.textContent=d.destinationName;
-
-option.dataset.price = Number(d.price.replace(/[^0-9]/g, ""));
-
-select.appendChild(option);
-
-});
-
-});
-
-document.getElementById("destination").addEventListener("change",function(){
-
-selectedPrice=parseInt(this.selectedOptions[0].dataset.price||0);
-
-});
-
-function calculateCost(){
-
-const travelers=parseInt(document.getElementById("travelers").value)||0;
-
-const total=selectedPrice*travelers;
-
-document.getElementById("totalCost").textContent="$"+total;
-
-}
-
-let trips=JSON.parse(localStorage.getItem("trips"))||[];
-
-displayTrips();
-
-document.getElementById("tripForm").addEventListener("submit",function(e){
-
-e.preventDefault();
-
-document.getElementById("destinationError").innerHTML="";
-document.getElementById("startError").innerHTML="";
-document.getElementById("endError").innerHTML="";
-document.getElementById("travelerError").innerHTML="";
-
-let destination=document.getElementById("destination").value;
-
-let start=document.getElementById("startDate").value;
-
-let end=document.getElementById("endDate").value;
-
-let travelers=parseInt(document.getElementById("travelers").value);
-
-let valid=true;
-
-const today=new Date().toISOString().split("T")[0];
-
-if(destination==""){
-
-document.getElementById("destinationError").innerHTML="Select destination";
-
-valid=false;
-
-}
-
-if(start<today){
-
-document.getElementById("startError").innerHTML="Past dates not allowed";
-
-valid=false;
-
-}
-
-if(end<start){
-
-document.getElementById("endError").innerHTML="End date must be after start date";
-
-valid=false;
-
-}
-
-if(travelers<1||travelers>10){
-
-document.getElementById("travelerError").innerHTML="Travelers must be between 1 and 10";
-
-valid=false;
-
-}
-
-if(valid){
-
-let trip={
-
-destination,
-
-start,
-
-end,
-
-travelers,
-
-cost:selectedPrice*travelers,
-
-status:"Pending"
-
-};
-
-trips.push(trip);
-
-localStorage.setItem("trips",JSON.stringify(trips));
-
-displayTrips();
-
-this.reset();
-
-document.getElementById("totalCost").textContent="$0";
-
-}
-
-});
-
-function displayTrips(){
-
-const table=document.getElementById("tripTable");
-
-table.innerHTML="";
-
-trips.forEach((trip,index)=>{
-
-table.innerHTML+=`
-
-<tr>
-
-<td>${trip.destination}</td>
-
-<td>${trip.start}<br>${trip.end}</td>
-
-<td>${trip.travelers}</td>
-
-<td>$${trip.cost}</td>
-
-<td>${trip.status}</td>
-
-<td>
-
-<button onclick="deleteTrip(${index})">
-
-Delete
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-}
-
-function deleteTrip(index){
-
-trips.splice(index,1);
-
-localStorage.setItem("trips",JSON.stringify(trips));
-
-displayTrips();
-
-}
-
-</script>
+<!-- ================= Upcoming Trips ================= -->
+<div class="container single-col">
+  <div class="trips">
+    <h2>🧳 Upcoming Trips</h2>
+    <div id="upcoming-trips" class="upcoming-grid"></div>
+  </div>
+</div>
+
+<!-- ================= Reminders ================= -->
+<div class="container single-col" id="reminders">
+  <div class="trips">
+    <div class="reminders-header">
+      <h2>🔔 Trip Reminders</h2>
+      <button class="add-reminder-btn" onclick="openAddReminderForm()">+ Add Reminder</button>
+    </div>
+
+    <div class="reminder-form-card" id="reminder-form-card">
+      <h3 id="reminder-form-title">Add Reminder</h3>
+
+      <label>Trip</label>
+      <select id="reminder-trip" onchange="onReminderTripChange()">
+        <option value="">— Select a trip —</option>
+      </select>
+      <small id="err-reminder-trip" style="display:none;">Please select a trip.</small>
+
+      <label>Reminder Type</label>
+      <select id="reminder-type" onchange="onReminderTypeChange()">
+        <option value="7days">7 Days Before Trip</option>
+        <option value="1day">1 Day Before Trip</option>
+        <option value="tripstarted">Trip Started Notification</option>
+      </select>
+
+      <label class="switch-row">
+        <span>Enabled</span>
+        <label class="switch">
+          <input type="checkbox" id="reminder-status" checked>
+          <span class="slider"></span>
+        </label>
+      </label>
+
+      <div class="reminder-preview" id="reminder-preview"></div>
+
+      <div class="reminder-form-actions">
+        <button type="button" class="save-btn" onclick="saveReminderForm()">Save Reminder</button>
+        <button type="button" class="cancel-btn" onclick="closeReminderForm()">Cancel</button>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Destination</th>
+          <th>Travel Start</th>
+          <th>Reminder Date &amp; Time</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="reminders-table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="reminders.js"></script>
+<script src="tripplanner.js"></script>
 
 </body>
 </html>
