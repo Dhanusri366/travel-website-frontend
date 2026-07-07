@@ -32,29 +32,36 @@
 
             <div class="card">
                 <h3>Total Trips</h3>
-                <p id="totalTrips">12</p>
+                <p id="totalTrips">0</p>
             </div>
 
             <div class="card">
                 <h3>Upcoming Trips</h3>
-                <p id="upcomingTrips">5</p>
+                <p id="upcomingTrips">0</p>
             </div>
 
             <div class="card">
                 <h3>Completed Trips</h3>
-                <p id="completedTrips">6</p>
+                <p id="completedTrips">0</p>
             </div>
 
             <div class="card">
                 <h3>Cancelled Trips</h3>
-                <p id="cancelledTrips">1</p>
+                <p id="cancelledTrips">0</p>
             </div>
 
             <div class="card">
                 <h3>Total Amount Spent</h3>
                 <p id="amountSpent">$0</p>
             </div>
-
+            <div class="card">
+    <h3>Trips This Month</h3>
+    <p id="tripsThisMonth">0</p>
+</div>
+<div class="card">
+    <h3>Next Trip</h3>
+    <p id="nextTripCountdown">0 Days</p>
+</div>
         </div>
 
         <div class="charts">
@@ -246,6 +253,37 @@ new Chart(document.getElementById("barChart"), {
     }
 
 });
+
+const currentMonth = new Date().getMonth();
+const currentYear = new Date().getFullYear();
+
+const tripsThisMonth = trips.filter(trip => {
+    const tripDate = new Date(trip.date);
+    return (
+        tripDate.getMonth() === currentMonth &&
+        tripDate.getFullYear() === currentYear
+    );
+}).length;
+
+document.getElementById("tripsThisMonth").textContent = tripsThisMonth;
+const today = new Date();
+
+const upcoming = trips
+    .filter(trip => trip.status === "Upcoming")
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+if (upcoming.length > 0) {
+    const nextTripDate = new Date(upcoming[0].date);
+
+    const diffDays = Math.ceil(
+        (nextTripDate - today) / (1000 * 60 * 60 * 24)
+    );
+
+    document.getElementById("nextTripCountdown").textContent =
+        diffDays + " Days";
+} else {
+    document.getElementById("nextTripCountdown").textContent = "No Upcoming Trips";
+}
 
 </script>
 
