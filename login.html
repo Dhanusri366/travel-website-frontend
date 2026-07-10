@@ -47,11 +47,18 @@
             <a href="register.html">Register</a>
         </p>
 
+        <p class="demo-hint">
+            Demo access: <strong>user@gmail.com</strong> / <strong>user@123</strong>
+        </p>
+
     </div>
 
 </div>
 
 <script>
+
+const DEMO_EMAIL = "user@gmail.com";
+const DEMO_PASSWORD = "user@123";
 
 const form=document.getElementById("loginForm");
 
@@ -94,6 +101,18 @@ valid=false;
 
 if(valid){
 
+// Special-case demo login — works without registering, per project spec
+if(email.toLowerCase()===DEMO_EMAIL && password===DEMO_PASSWORD){
+
+sessionStorage.setItem("wv_auth","true");
+sessionStorage.setItem("wv_user_email", email);
+
+window.location.href="booking.html";
+
+return;
+
+}
+
 const user=JSON.parse(localStorage.getItem(email));
 
 if(user==null){
@@ -106,9 +125,10 @@ return;
 
 if(user.password===password){
 
-alert("Login Successful!");
+sessionStorage.setItem("wv_auth","true");
+sessionStorage.setItem("wv_user_email", email);
 
-window.location.href="index.html";
+window.location.href="booking.html";
 
 }
 
