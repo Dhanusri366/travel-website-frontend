@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Planner – WanderVista</title>
+    <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/expensePlanner.css" />
+
+   
+  </head>
+  <body>
+    <!-- ══ NAV ══ -->
+    <nav>
+      <div class="logo">🌴 Wander<span>Vista</span></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#destinations">Destinations</a></li>
+        <li><a href="tripplanner.html">Trip Planner</a></li>
+        <li><a href="expenseplanner.html">Expense Planner</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">Plan a Trip</a>
+      <button id="menu-btn" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <section id="planner-hero">
+      <div class="ph-label">💰 Budget Smart</div>
+      <h1>Travel Expense <span>Planner</span></h1>
+      <p>
+        Estimate every rupee before you pack your bags. Log accommodation, transport,
+        food, shopping and more — we'll total it up and flag where your budget leans hardest.
+      </p>
+    </section>
+
+    <!-- ══ PLANNER ══ -->
+    <section id="planner">
+
+      <!-- Summary strip -->
+      <div class="summary-grid" id="summary-grid">
+        <div class="summary-box">
+          <strong id="sum-count">0</strong>
+          <span>Saved Plans</span>
+        </div>
+        <div class="summary-box">
+          <strong id="sum-total">₹0</strong>
+          <span>Total Budgeted</span>
+        </div>
+        <div class="summary-box">
+          <strong id="sum-avg">₹0</strong>
+          <span>Avg. Cost / Trip</span>
+        </div>
+        <div class="summary-box highlight">
+          <strong id="sum-topcat">–</strong>
+          <span>Highest Expense Category</span>
+        </div>
+      </div>
+
+      <div class="planner-layout">
+
+        <!-- Form -->
+        <div class="planner-form-card">
+          <h3>Add / Edit Expense Plan</h3>
+          <div class="exp-id-tag" id="form-exp-id">Expense ID: will be auto-generated</div>
+
+          <div class="form-group">
+            <label for="p-destination">Destination Name *</label>
+            <input type="text" id="p-destination" placeholder="e.g. Bali, Indonesia" oninput="liveTotal()" />
+            <div class="form-error" id="err-destination">Please enter at least 3 characters.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="p-travelers">Number of Travelers *</label>
+            <input type="number" id="p-travelers" min="1" step="1" placeholder="e.g. 2" oninput="liveTotal()" />
+            <div class="form-error" id="err-travelers">Enter a whole number greater than 0.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="form-group">
+              <label for="p-accommodation">Accommodation Cost</label>
+              <input type="number" id="p-accommodation" min="0" step="0.01" value="0" oninput="liveTotal()" />
+              <div class="form-error" id="err-accommodation">Cannot be negative.</div>
+            </div>
+            <div class="form-group">
+              <label for="p-transport">Transportation Cost</label>
+              <input type="number" id="p-transport" min="0" step="0.01" value="0" oninput="liveTotal()" />
+              <div class="form-error" id="err-transport">Cannot be negative.</div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="form-group">
+              <label for="p-food">Food Cost</label>
+              <input type="number" id="p-food" min="0" step="0.01" value="0" oninput="liveTotal()" />
+              <div class="form-error" id="err-food">Cannot be negative.</div>
+            </div>
+            <div class="form-group">
+              <label for="p-shopping">Shopping Budget</label>
+              <input type="number" id="p-shopping" min="0" step="0.01" value="0" oninput="liveTotal()" />
+              <div class="form-error" id="err-shopping">Cannot be negative.</div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="form-group">
+              <label for="p-activity">Activity Cost</label>
+              <input type="number" id="p-activity" min="0" step="0.01" value="0" oninput="liveTotal()" />
+              <div class="form-error" id="err-activity">Cannot be negative.</div>
+            </div>
+            <div class="form-group">
+              <label for="p-misc">Miscellaneous Expenses</label>
+              <input type="number" id="p-misc" min="0" step="0.01" value="0" oninput="liveTotal()" />
+              <div class="form-error" id="err-misc">Cannot be negative.</div>
+            </div>
+          </div>
+
+          <div class="total-box">
+            <span class="lbl">Total Estimated Cost</span>
+            <span class="val" id="live-total">₹0.00</span>
+          </div>
+
+          <div class="form-btn-row">
+            <button class="form-submit" id="submit-btn" onclick="submitPlan()">Add Expense Plan 🌴</button>
+            <button class="btn-clear" onclick="clearForm()">Clear</button>
+          </div>
+        </div>
+
+        <!-- List -->
+        <div>
+          <div class="plans-head">
+            <h3>Saved Expense Plans</h3>
+            <span id="plans-count-label">0 plans</span>
+          </div>
+          <div class="plan-list" id="plan-list">
+            <div class="empty-message">No expense plans yet. Add your first trip budget on the left.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+      <p>
+        © 2025 🌴 <span>WanderVista</span>. All rights reserved. Crafted with ☀️
+        for tropical dreamers everywhere.
+      </p>
+    </footer>
+
+    <div class="toast-stack" id="toast-stack"></div>
+
+    <script src="reminders.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // ── Expense Planner logic (in-memory for this session) ──
+      let plans = [];
+      let editingId = null;
+      let nextIdNum = 1001;
+
+      const categories = [
+        { key: 'accommodation', label: 'Accommodation', input: 'p-accommodation' },
+        { key: 'transport', label: 'Transportation', input: 'p-transport' },
+        { key: 'food', label: 'Food', input: 'p-food' },
+        { key: 'shopping', label: 'Shopping', input: 'p-shopping' },
+        { key: 'activity', label: 'Activities', input: 'p-activity' },
+        { key: 'misc', label: 'Miscellaneous', input: 'p-misc' },
+      ];
+
+      function num(id) {
+        const v = parseFloat(document.getElementById(id).value);
+        return isNaN(v) ? 0 : v;
+      }
+
+      function currentCosts() {
+        const costs = {};
+        categories.forEach(c => costs[c.key] = Math.max(0, num(c.input)));
+        return costs;
+      }
+
+      function totalOf(costs) {
+        return Object.values(costs).reduce((a, b) => a + b, 0);
+      }
+
+      function fmt(n) {
+        return '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function liveTotal() {
+        const total = totalOf(currentCosts());
+        document.getElementById('live-total').textContent = fmt(total);
+      }
+
+      function showError(fieldId, show) {
+        const el = document.getElementById('err-' + fieldId);
+        if (el) el.style.display = show ? 'block' : 'none';
+      }
+
+      function validate() {
+        let valid = true;
+        const dest = document.getElementById('p-destination').value.trim();
+        const travelers = document.getElementById('p-travelers').value;
+
+        if (dest.length < 3) { showError('destination', true); valid = false; }
+        else showError('destination', false);
+
+        const travelersNum = Number(travelers);
+        if (!travelers || travelersNum <= 0 || !Number.isInteger(travelersNum)) {
+          showError('travelers', true); valid = false;
+        } else showError('travelers', false);
+
+        categories.forEach(c => {
+          const raw = document.getElementById(c.input).value;
+          const n = Number(raw);
+          if (raw === '' || isNaN(n) || n < 0) { showError(c.key, true); valid = false; }
+          else showError(c.key, false);
+        });
+
+        return valid;
+      }
+
+      function submitPlan() {
+        if (!validate()) {
+          showToast('Please fix the highlighted fields.', 'coral');
+          return;
+        }
+        const costs = currentCosts();
+        const plan = {
+          id: editingId || 'EXP-' + (nextIdNum++),
+          destination: document.getElementById('p-destination').value.trim(),
+          travelers: parseInt(document.getElementById('p-travelers').value, 10),
+          costs,
+          total: totalOf(costs),
+        };
+
+        if (editingId) {
+          const idx = plans.findIndex(p => p.id === editingId);
+          plans[idx] = plan;
+          showToast('Expense plan updated.', '');
+        } else {
+          plans.push(plan);
+          showToast('Expense plan added.', '');
+        }
+
+        clearForm();
+        renderPlans();
+        renderSummary();
+      }
+
+      function clearForm() {
+        editingId = null;
+        document.getElementById('p-destination').value = '';
+        document.getElementById('p-travelers').value = '';
+        categories.forEach(c => document.getElementById(c.input).value = 0);
+        document.getElementById('form-exp-id').textContent = 'Expense ID: will be auto-generated';
+        document.getElementById('submit-btn').textContent = 'Add Expense Plan 🌴';
+        categories.concat([{key:'destination'},{key:'travelers'}]).forEach(c => showError(c.key, false));
+        liveTotal();
+      }
+
+      function editPlan(id) {
+        const plan = plans.find(p => p.id === id);
+        if (!plan) return;
+        editingId = id;
+        document.getElementById('form-exp-id').textContent = 'Expense ID: ' + plan.id;
+        document.getElementById('p-destination').value = plan.destination;
+        document.getElementById('p-travelers').value = plan.travelers;
+        categories.forEach(c => document.getElementById(c.input).value = plan.costs[c.key]);
+        document.getElementById('submit-btn').textContent = 'Update Expense Plan 🌴';
+        liveTotal();
+        window.scrollTo({ top: document.getElementById('planner').offsetTop - 90, behavior: 'smooth' });
+      }
+
+      function deletePlan(id) {
+        plans = plans.filter(p => p.id !== id);
+        if (editingId === id) clearForm();
+        renderPlans();
+        renderSummary();
+        showToast('Expense plan deleted.', 'coral');
+      }
+
+      function highestCategory(costs) {
+        let topKey = null, topVal = -1;
+        categories.forEach(c => {
+          if (costs[c.key] > topVal) { topVal = costs[c.key]; topKey = c.key; }
+        });
+        return categories.find(c => c.key === topKey);
+      }
+
+      function renderPlans() {
+        const list = document.getElementById('plan-list');
+        document.getElementById('plans-count-label').textContent = plans.length + (plans.length === 1 ? ' plan' : ' plans');
+
+        if (plans.length === 0) {
+          list.innerHTML = '<div class="empty-message">No expense plans yet. Add your first trip budget on the left.</div>';
+          return;
+        }
+
+        list.innerHTML = plans.map(plan => {
+          const top = highestCategory(plan.costs);
+          const tags = categories.map(c => {
+            const isTop = c.key === top.key && plan.costs[c.key] > 0;
+            return `<span class="cat-tag${isTop ? ' top' : ''}">${c.label}: ${fmt(plan.costs[c.key])}</span>`;
+          }).join('');
+
+          return `
+            <div class="plan-card">
+              <div class="plan-top">
+                <div>
+                  <span class="plan-id">${plan.id}</span>
+                  <h4>${escapeHtml(plan.destination)}</h4>
+                  <div class="plan-travelers">👥 ${plan.travelers} traveler${plan.travelers > 1 ? 's' : ''}</div>
+                </div>
+                <div class="plan-total">
+                  <div class="amt">${fmt(plan.total)}</div>
+                  <div class="amt-lbl">Total Estimated Cost</div>
+                </div>
+              </div>
+              <div class="plan-breakdown">${tags}</div>
+              <div class="plan-actions">
+                <button class="edit-btn" onclick="editPlan('${plan.id}')">✏️ Edit</button>
+                <button class="delete-btn" onclick="deletePlan('${plan.id}')">🗑️ Delete</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderSummary() {
+        document.getElementById('sum-count').textContent = plans.length;
+        const totalBudget = plans.reduce((a, p) => a + p.total, 0);
+        document.getElementById('sum-total').textContent = fmt(totalBudget);
+        const avg = plans.length ? totalBudget / plans.length : 0;
+        document.getElementById('sum-avg').textContent = fmt(avg);
+
+        const catTotals = {};
+        categories.forEach(c => catTotals[c.key] = 0);
+        plans.forEach(p => categories.forEach(c => catTotals[c.key] += p.costs[c.key]));
+
+        let topKey = null, topVal = -1;
+        Object.keys(catTotals).forEach(k => { if (catTotals[k] > topVal) { topVal = catTotals[k]; topKey = k; } });
+        const topLabel = plans.length && topVal > 0 ? categories.find(c => c.key === topKey).label : '–';
+        document.getElementById('sum-topcat').textContent = topLabel;
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function showToast(msg, cls) {
+        const stack = document.getElementById('toast-stack');
+        const toast = document.createElement('div');
+        toast.className = 'toast' + (cls ? ' ' + cls : '');
+        toast.textContent = msg;
+        stack.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 300);
+        }, 2600);
+      }
+
+      liveTotal();
+    </script>
+  </body>
+</html>

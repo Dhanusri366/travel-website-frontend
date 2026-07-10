@@ -5,20 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav>
-        <div class="logo" style="font-family:'Pacifico',cursive;">🌴 WanderVista</div>
-
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="tripplanner.html">Trip Planner</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="profile.html" class="active">Profile</a></li>
-        </ul>
+     <nav>
+      <div class="logo">🌴 Wander<span>Vista</span></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#destinations">Destinations</a></li>
+        <li><a href="tripplanner.html">Trip Planner</a></li>
+        <li><a href="expenseplanner.html">Expense Planner</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">Plan a Trip</a>
+      <button id="menu-btn" onclick="toggleMenu()">☰</button>
     </nav>
 
     <!-- Profile Section -->
